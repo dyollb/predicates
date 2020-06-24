@@ -52,6 +52,9 @@ else()
   message(FATAL_ERROR "BUILD_SHARED_LIBS Must be set to ON in order to build properly.")
 endif(BUILD_SHARED_LIBS)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+include(sanitizers)
+
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory (src)

@@ -1,11 +1,13 @@
 
-#include <cassert>
 #include <cfloat>
 #include <cmath>
 
 #include <vector>
 
 #include <predicates.hpp>
+
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
 
 using namespace predicates;
 
@@ -32,12 +34,13 @@ std::vector<int> sums_of_squares(int n)
 }
 
 
-int main()
+TEST_CASE( "Running incircle tests", "incircle" )
 {
 
   /**
    * Test a really easy case
    */
+  SECTION( "Test a really easy case" )
   {
     double x1[] = {1.0, 0.0};
     double x2[] = {0.0, 1.0};
@@ -46,14 +49,15 @@ int main()
     double p[] = {0.0, nextafter(-1.0, 0.0)};
     double q[] = {0.0, nextafter(-1.0, -2.0)};
 
-    assert(incircle(x1, x2, x3, p) > 0);
-    assert(incircle(x1, x2, x3, q) < 0);
+    CHECK(incircle(x1, x2, x3, p) > 0);
+    CHECK(incircle(x1, x2, x3, q) < 0);
   }
 
 
   /**
    * Test a more interesting case
    */
+  SECTION( "Test a more interesting case" )
   {
     // This integer is nice because it's a perfect square and can be written as
     // the sum of two squares in 14 different ways.
@@ -85,13 +89,11 @@ int main()
         const double y[] = {q[0] - x[0], q[1] - x[1]};
         const double r2 = y[0]*y[0] + y[1]*y[1];
 
-        if (r2 < n*n) assert(p > 0);
-        else if (r2 > n*n) assert(p < 0);
+        if (r2 < n*n) CHECK(p > 0);
+        else if (r2 > n*n) CHECK(p < 0);
       };
 
     double q4[] = {0.0, 0.0};
     perturb2d(predicate, q4, 256, 256, correct);
   }
-
-  return 0;
 }

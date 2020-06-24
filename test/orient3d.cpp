@@ -1,7 +1,9 @@
 #include <predicates.hpp>
-#include <cassert>
 
-int main()
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+
+TEST_CASE( "Running orient2d tests", "orient2d" )
 {
     /**
      * This test was reported by github user mlivesu. The following four points
@@ -13,6 +15,6 @@ int main()
     double x2[] = {7.860530853271484, -21.5969181060791, -13.784418106079102};
     double x3[] = {7.077847957611084, -21.82772445678711, -14.01522445678711};
 
-    assert(predicates::orient3d(x0, x1, x2, x3) == 0.0);
-    assert(predicates::orient3d(x2, x3, x0, x1) == 0.0);
+    CHECK(predicates::orient3d(x0, x1, x2, x3) == 0.0);
+    CHECK(predicates::orient3d(x2, x3, x0, x1) == 0.0);
 }

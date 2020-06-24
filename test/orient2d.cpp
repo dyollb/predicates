@@ -1,13 +1,15 @@
 
-#include <cassert>
 #include <cfloat>
 #include <cmath>
 
 #include <predicates.hpp>
 
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+
 using namespace predicates;
 
-int main()
+TEST_CASE( "Running orient2d tests", "orient2d" )
 {
   /**
    * Test a really easy case
@@ -16,8 +18,8 @@ int main()
   double x2[] = {1.0, 1.0};
   double x3[] = {0.0, 1.0};
 
-  assert(orient2d(x1, x2, x3) > 0);
-  assert(orient2d(x1, x3, x2) < 0);
+  CHECK(orient2d(x1, x2, x3) > 0);
+  CHECK(orient2d(x1, x3, x2) < 0);
 
 
   /**
@@ -42,16 +44,13 @@ int main()
   auto correct =
     [](const double p, const double * q, const size_t, const size_t)
     {
-      if (q[1] > q[0]) assert(p > 0);
-      else if (q[1] < q[0]) assert(p < 0);
-      else assert(p == 0.0);
+      if (q[1] > q[0]) CHECK(p > 0);
+      else if (q[1] < q[0]) CHECK(p < 0);
+      else CHECK(p == 0.0);
     };
 
   // Check all points within a 256 x 256 grid of (0.5, 0.5).
   perturb2d(predicate1, q1, 256, 256, correct);
   perturb2d(predicate2, q1, 256, 256, correct);
   perturb2d(predicate3, q1, 256, 256, correct);
-
-
-  return 0;
 }
