@@ -1,4 +1,4 @@
-# predicates
+# predicates [![Build Status](https://travis-ci.com/dyollb/predicates.svg?branch=master)](https://travis-ci.com/dyollb/predicates)
 
 This library provides code for performing robust geometric computations using adaptive-precision floating-point arithmetic.
 It is based on code by Jonathan Richard Shewchuk; the original source is available [here](http://www.cs.cmu.edu/afs/cs/project/quake/public/code/predicates.c).
